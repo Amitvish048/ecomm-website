@@ -1,0 +1,47 @@
+{% include 'header.html' %}
+
+{% block content %}
+<div class="container">
+    <h5 class="mt-4"><strong>Cart Details</strong></h5>
+    <div class="row mt-4">
+        {% for product in products %}
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="{{ product.pid.image.url }}" class="img-fluid" alt="{{ product.pid.name }}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>{{ product.pid.name }}</strong></h5>
+                            <p class="card-text"><strong>Price:</strong> Rs {{ product.pid.price }}</p>
+                            <p class="card-text"><strong>Product Details:</strong> {{ product.pid.pdetails }}</p>
+                            <p class="card-text"><strong>Quantity:</strong></p>
+                            <div class="d-flex align-items-center">
+                                <a href="/update/0/{{ product.id }}"><button class="btn btn-danger me-2">-</button></a>
+                                <input type="number" value="{{ product.quantity }}" style="width: 60px;">
+                                <a href="/update/1/{{ product.id }}"><button class="btn btn-danger ms-2">+</button></a>
+                            </div>
+                            <a href="/remove/{{ product.id }}" class="btn btn-danger mt-3">Remove</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title bg-body-tertiary">Total Amount</h5>
+                    <p class="card-text"><strong>Total ({{ np }} item): Rs {{ price }}</strong></p>
+                    <a href="/placeorder" class="btn btn-outline-success">Place Order</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% include 'footer.html' %}

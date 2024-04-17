@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="card">
+			<div class="container-fliud bg-secondary">
+				<div class="col-md-6">
+					<div class="row">
+						
+						<div class="col-md-6">
+                            <div class="card" style="width: 100%">
+                                <img src="{{products.image.url}}" class="card-img-top" alt="..." />
+						</div>
+	
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title">{{products.name}}</h3>
+                        <p class="product-description">{{products.pdetails}}</p>
+						<h4 class="price">current price: <span>{{products.price}}</span>Rs</h4
+						</div>
+						
+						<div class="d-grid gap-2 d-md-block ">
+                            <a href="/addtocart/{{products.id}}" class="btn btn-primary" type="button">Add to cart</a>
+                            <button class="btn btn-primary" type="button">check out</button>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+    </div>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- <div class="container">
+  <div id="carouselExampleSlidesOnly" class="carousel slide mt-4" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Slide 2">
+      </div>
+      <div class="carousel-item">
+        <img src="https://via.placeholder.com/800x400" class="d-block w-100" alt="Slide 3">
+      </div>
+    </div>
+  </div>
+</div> -->
+<!-- Home Section -->
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card bg-light mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Filter by Category</h5>
+          <hr>
+          <p><a href="/" class="card-link">All</a></p>
+          <p><a href="/cartfilter/1" class="card-link">By Mobile</a></p>
+          <p><a href="/cartfilter/2" class="card-link">By Clothes</a></p>
+          <p><a href="/cartfilter/3" class="card-link">By Shoes</a></p>
+        </div>
+      </div>
+      <div class="card bg-light mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Filter by Price</h5>
+          <hr>
+          <form method="POST" action="/range">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="minPrice" class="form-label">MIN:</label>
+              <input name="min" type="number" class="form-control" id="minPrice" placeholder="Min Value">
+            </div>
+            <div class="mb-3">
+              <label for="maxPrice" class="form-label">MAX:</label>
+              <input name="max" type="number" class="form-control" id="maxPrice" placeholder="Max Value">
+            </div>
+            <button type="submit" class="btn btn-danger">Search</button>
+          </form>
+        </div>
+      </div>
+      <div class="card bg-light mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Sort by Price</h5>
+          <hr>
+          <p><a href="/sort/0" class="card-link">High to Low</a></p>
+          <p><a href="/sort/1" class="card-link">Low to High</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        {% for product in products %}
+        <div class="col-md-6 mb-4">
+          <div class="card">
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.price }}</p>
+              <p class="card-text">{{ product.pdetails }}</p>
+              {% if product.category == 1 %}
+              <p class="card-text">Mobile</p>
+              {% elif product.category == 2 %}
+              <p class="card-text">Shoes</p>
+              {% else %}
+              <p class="card-text">Clothes</p>
+              {% endif %}
+              <a href="/products/{{ product.id }}" class="btn btn-primary">See More</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
